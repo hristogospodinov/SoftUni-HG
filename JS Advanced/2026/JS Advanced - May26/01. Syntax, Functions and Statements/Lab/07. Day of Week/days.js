@@ -1,12 +1,24 @@
-function dayOfWeek(num) {
-    let days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];  
-    if (num >= 1 && num <= 7) {
-        console.log(days[num - 1]);
-    } else {
-        console.log('Invalid day!');
-    }               
+function dayOfWeek(day) {
+    switch (day) {
+        case "Monday":
+            return 1; break;
+        case "Tuesday":
+            return 2; break;
+        case "Wednesday":
+            return 3; break;
+        case "Thursday":
+            return 4; break;
+        case "Friday":
+            return 5; break;
+        case "Saturday":
+            return 6; break;
+        case "Sunday":
+            return 7; break;
+        default:
+            return "error"; break;
+    }
 }
 
-dayOfWeek(3);
-dayOfWeek(6);
-dayOfWeek(11);  
+console.log(dayOfWeek("Monday"));
+console.log(dayOfWeek("Saturday"));
+console.log(dayOfWeek("blabla"));  
