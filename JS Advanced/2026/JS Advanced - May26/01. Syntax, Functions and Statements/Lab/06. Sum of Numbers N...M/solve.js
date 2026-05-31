@@ -1,12 +1,14 @@
-function sumOfNumbersNtoM(n, m) {
+function sumOfNtoM(n, m) {
+    n = Number(n);
+    m = Number(m);
+
     let sum = 0;
     for (let i = n; i <= m; i++) {
-        sum += i;
+        sum = sum + i;
     }
     console.log(sum);
 }
-
-sumOfNumbersNtoM(1, 5);
-sumOfNumbersNtoM(3, 7);
-sumOfNumbersNtoM(-8, 20);
+sumOfNtoM(1, 5);
+sumOfNtoM(3, 7);
+sumOfNtoM(-8, 20);
 
