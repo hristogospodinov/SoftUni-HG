@@ -2,8 +2,7 @@ function fruit(fruit, weightInGr, pricePerKilo) {
     let weightInKg = weightInGr / 1000;
     let totalPrice = weightInKg * pricePerKilo;
 
-    console.log(`I need ${totalPrice.toFixed(2)} to buy ${weightInKg.toFixed(2)} kilograms ${fruit}.`);
-    
+    console.log(`I need $${totalPrice.toFixed(2)} to buy ${weightInKg.toFixed(2)} kilograms ${fruit}.`);    
 }
 
 
