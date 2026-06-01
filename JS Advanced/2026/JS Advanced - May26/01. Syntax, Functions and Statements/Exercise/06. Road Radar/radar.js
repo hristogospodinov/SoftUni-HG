@@ -16,10 +16,7 @@ function radar(speed, area) {
         else {status = 'reckless driving'};
 
         console.log(`The speed is ${difference} km/h faster than the allowed speed of ${limit} - ${status}`);
-    }
-
-    
-    
+    }    
 }
 
 radar(40, 'city');
