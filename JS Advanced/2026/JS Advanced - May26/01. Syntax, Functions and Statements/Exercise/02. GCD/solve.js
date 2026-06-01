@@ -3,8 +3,7 @@ function gcd(num1, num2){
         let temp = num2;
         num2 = num1 % num2;
         num1 = temp;
-    }
-    
+    }    
     console.log(Math.abs(num1));
 }
 
