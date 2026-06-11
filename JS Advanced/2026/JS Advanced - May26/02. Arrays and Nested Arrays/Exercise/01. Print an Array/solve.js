@@ -1,6 +1,5 @@
 function printArr(array, str) {
     console.log(array.join(str));
-    
 }
 
 printArr(['One', 
