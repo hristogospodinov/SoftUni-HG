@@ -4,7 +4,6 @@ function arrRotate(arr, steps) {
         arr.unshift(last);
     }
     console.log(arr.join(' '));
-    
 }
 
 arrRotate(['1', 
