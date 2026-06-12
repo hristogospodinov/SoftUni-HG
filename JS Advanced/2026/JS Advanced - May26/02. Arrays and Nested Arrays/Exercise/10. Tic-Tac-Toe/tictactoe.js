@@ -38,7 +38,7 @@ function game (moves) {
     
     
 
-    function checkWinner() {
+    function checkWinner(board, player) {
         for (let row = 0; row < 3; row++) {
             if(
                 board[row][0] === player &&
@@ -66,7 +66,7 @@ function game (moves) {
         return false;
     }    
 
-    function isBoardFull() {
+    function isBoardFull(board) {
         for (const row of board) {
             if (row.includes(false)) {
                 return false;
