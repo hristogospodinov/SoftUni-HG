@@ -8,10 +8,20 @@ function checkDiags(array) {
         mainSum += matrix[row][row];
         secondarySum += matrix[row][matrix.length - 1 - row];        
     }
-   
-    console.log(matrix);
-    console.log(mainSum);
-    console.log(secondarySum);
+    
+    if (mainSum === secondarySum) {
+        for (let row = 0; row < matrix.length; row++) {
+            for (let col = 0; col < matrix.length; col++) {
+                if ((row !== col) && (col !== matrix.length - 1 - row)) {
+                    matrix[row][col] = mainSum;
+                }
+            }            
+        }
+    }
+
+    for (let row of matrix) {
+        console.log(row.join(' '));
+    }    
 }
 
 checkDiags(['5 3 12 3 1',
@@ -20,6 +30,14 @@ checkDiags(['5 3 12 3 1',
 '1 4 5 2 2',
 '5 22 33 11 1']
 )
+
+console.log('='.repeat(10));
+
+checkDiags(	['1 1 1',
+'1 1 1',
+'1 1 0']
+)
+
 
     // for (let row = 0; row < matrix.length; row++) {
     //     for (let col = 0; col < matrix[row].length; col++) {
