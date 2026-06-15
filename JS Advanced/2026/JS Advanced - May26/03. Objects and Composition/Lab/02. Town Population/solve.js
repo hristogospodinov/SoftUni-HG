@@ -12,8 +12,7 @@ function townPopulation(array) {
     }
 
     for (const [town, population] of towns) {
-        console.log(`${town} : ${population}`);
-        
+        console.log(`${town} : ${population}`);        
     }
 }
 
