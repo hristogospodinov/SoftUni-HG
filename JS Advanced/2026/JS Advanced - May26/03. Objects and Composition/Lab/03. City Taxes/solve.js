@@ -1,24 +1,28 @@
 function cityTaxes(name, population, treasury) {
-    const city = {};
-
-    city.name = name;
-    city.population = population;
-    city.treasury = treasury;
-    city.taxRate = 10;
-
-    city.collectTaxes = function() {
-            this.treasury += Math.floor(this.population * this.taxRate);
+    const city = {
+        name,
+        population,
+        treasury,
+        taxRate: 10,
+        collectTaxes,
+        applyGrowth,
+        applyRecession
     };
-    city.applyGrowth = function(percentage) {
-        this.population += Math.floor(this.population * percentage / 100);
-    };
-    city.applyRecession = function(percentage) {
-        this.treasury -= Math.ceil(this.treasury * percentage / 100);  
-    };
-
     
     return city;
 }
+
+function collectTaxes() {
+    this.treasury += Math.floor(this.population * this.taxRate);
+};
+
+function applyGrowth(percentage) {
+    this.population += Math.floor(this.population * percentage / 100);
+};
+
+function applyRecession(percentage) {
+    this.treasury -= Math.ceil(this.treasury * percentage / 100);  
+};
 
 const city =
   cityTaxes('Tortuga',
