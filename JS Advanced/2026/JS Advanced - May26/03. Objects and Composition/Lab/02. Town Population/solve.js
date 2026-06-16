@@ -1,18 +1,20 @@
-function townPopulation(array) {
-    const towns = new Map();
-    for (const line of array) {
-        let [town, population] = line.split(' <-> ');
-        population = Number(population);
-        if (towns.has(town)) {
-            let currentPopulation = towns.get(town);
-            towns.set(town, currentPopulation + population);
-        } else {
-            towns.set(town, population);
+function townPopulation(input) {
+    const result = {};
+
+    for (let entry of input) {
+        const tokens = entry.split(' <-> ');
+        const townName = tokens[0];
+        const population = Number(tokens[1]);
+
+        if (result.hasOwnProperty(townName) == false) {
+            result[townName] = 0;
         }
+
+        result[townName] += population;
     }
 
-    for (const [town, population] of towns) {
-        console.log(`${town} : ${population}`);        
+    for (let townName in result) {
+        console.log(`${townName} : ${result[townName]}`);        
     }
 }
 
@@ -31,3 +33,19 @@ townPopulation(['Istanbul <-> 100000',
 'Mexico City <-> 23401925',
 'Istanbul <-> 1000']
 );
+
+// const towns = new Map();
+//     for (const line of array) {
+//         let [town, population] = line.split(' <-> ');
+//         population = Number(population);
+//         if (towns.has(town)) {
+//             let currentPopulation = towns.get(town);
+//             towns.set(town, currentPopulation + population);
+//         } else {
+//             towns.set(town, population);
+//         }
+//     }
+
+//     for (const [town, population] of towns) {
+//         console.log(`${town} : ${population}`);        
+//     }
