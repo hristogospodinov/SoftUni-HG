@@ -1,6 +1,10 @@
 function createSortedList() {
     let collection = [];
 
+    function isValid(index) {
+    return index >= 0 && index < collection.length;
+}
+
     return {
         add(element) {
             collection.push(element);
@@ -8,13 +12,13 @@ function createSortedList() {
         },
 
         remove(index) {
-            if (index >= 0 && index < collection.length) {
+            if (isValid(index)) {
                 collection.splice(index, 1);
             }
         },
 
         get(index) {
-            if (index >= 0 && index < collection.length) {
+            if (isValid(index)) {
                 return collection[index];
             }
         },
@@ -22,7 +26,6 @@ function createSortedList() {
         get size() {
             return collection.length;
         }
-
     };
 }
 
