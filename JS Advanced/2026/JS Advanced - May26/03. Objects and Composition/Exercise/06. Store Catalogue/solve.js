@@ -11,11 +11,8 @@ function storage(input) {
             console.log(firstLetter);
             currentLetter = firstLetter;            
         }
-        console.log(`  ${name}: ${price}`);
-        
+        console.log(`  ${name}: ${price}`);        
     }
-    
-    
 }
 
 storage(['Appricot : 20.4',
