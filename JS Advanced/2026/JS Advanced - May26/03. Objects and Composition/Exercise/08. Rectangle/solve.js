@@ -4,7 +4,7 @@ function rectangle(width, height, color) {
         width,
         height,
         color,
-        calcArea() {return width * height}
+        calcArea() {return this.width * this.height}
     }
 }
 
