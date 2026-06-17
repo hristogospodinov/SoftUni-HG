@@ -10,9 +10,7 @@ function heroInventory(heroes) {
         heroRegister.push({ name, level, items}); 
     }
     
-    console.log(JSON.stringify(heroRegister));
-    
-
+    console.log(JSON.stringify(heroRegister));  
 }
 
 heroInventory(['Isacc / 25 / Apple, GravityGun',
