@@ -8,14 +8,18 @@ function createSortedList() {
         },
 
         remove(index) {
-            collection.splice(index, 1);
+            if (index >= 0 && index < collection.length) {
+                collection.splice(index, 1);
+            }
         },
 
         get(index) {
-            return collection[index];
+            if (index >= 0 && index < collection.length) {
+                return collection[index];
+            }
         },
 
-        size() {
+        get size() {
             return collection.length;
         }
 
@@ -29,4 +33,12 @@ list.add(7);
 console.log(list.get(1)); 
 list.remove(1);
 console.log(list.get(1));
-console.log(list.size())
+
+var myList = result();
+expect(myList.hasOwnProperty('size')).to.equal(true, "Property size was not found");
+
+// Generate random list of 20 numbers
+var expectedArray = [];
+for (let i = 0; i < 20; i++) {
+    expectedArray.push(Math.floor(Math.random() * 200) - 100);
+}
