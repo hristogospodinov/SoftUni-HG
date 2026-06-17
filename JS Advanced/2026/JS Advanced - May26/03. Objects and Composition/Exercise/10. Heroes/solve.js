@@ -45,8 +45,7 @@ function solve() {
     return {
         mage,
         fighter
-    };
-    
+    };    
 }
 
 
