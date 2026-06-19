@@ -1,3 +1,7 @@
 function showText() {
-    // TODO
+    const linkText = document.getElementById('more');
+    const moreText = document.getElementById('text');
+
+    linkText.style.display = 'none';
+    moreText.style.display = '';
 }
