@@ -4,7 +4,8 @@ function solve() {
 
     const sentences = input
         .split('.')
-        .filter(sentence => sentence.trim() !== '');
+        .map(sentence => sentence.trim())
+        .filter(sentence => sentence !== '');
 
     let result = '';
 
