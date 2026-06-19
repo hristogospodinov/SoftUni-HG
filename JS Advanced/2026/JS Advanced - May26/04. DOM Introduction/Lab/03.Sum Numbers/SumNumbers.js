@@ -4,6 +4,4 @@ function calc() {
 
     const resultArea = document.getElementById('sum');
     resultArea.value = number1 + number2;
-
-
 }
