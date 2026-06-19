@@ -3,5 +3,5 @@ function showText() {
     const moreText = document.getElementById('text');
 
     linkText.style.display = 'none';
-    moreText.style.display = '';
+    moreText.style.display = 'inline';
 }
