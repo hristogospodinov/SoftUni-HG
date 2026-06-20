@@ -1,0 +1,86 @@
+class AirlineFleet {
+    constructor(budget) {
+        this.budget = budget;
+        this.planes = [];
+        this.completedFlights = [];
+    }
+
+    addPlane(model, cost, capacity, fuelConsumption) {
+        if (cost > this.budget) {
+            return `Not enough budget to add '${model}' plane.`;
+        }
+        this.planes.push({
+            model,
+            cost,
+            capacity,
+            fuelConsumption
+        });
+        this.budget -= cost;
+        return `The plane '${model}' has been successfully added to the airline fleet.`;
+    }
+
+    scheduleFlight(destination, ticketPrice, requiredFuel, passengers) {
+        if (this.planes.length === 0) {
+            throw new Error("No planes available for scheduling flights.");
+        }
+        let enoughFuel = false;
+        for(const plane of this.planes) {
+            if (plane.fuelConsumption <= requiredFuel) {
+                enoughFuel = true;
+                break;
+            }
+        }
+        if(!enoughFuel) {
+            return `Not enough fuel capacity to reach ${destination}.`
+        }
+
+        let revenue = ticketPrice * passengers;
+        this.completedFlights.push(destination);
+        this.budget += revenue;
+        return `Flight to ${destination} completed successfully. Revenue: $${revenue}.`;        
+    }
+
+    getPlanesByCapacity(minCapacity) {
+        if (minCapacity <= 0) {
+            return "The capacity must be a positive number.";
+        }
+
+        let planesCount = 0;
+
+        for(let plane of this.planes) {
+            if (plane.capacity >= minCapacity) {
+                planesCount++;
+            }
+        }
+
+        if (planesCount > 0) {
+            return `You have ${planesCount} planes with capacity ${minCapacity} or higher.`;
+        } else {
+            return `No planes found with capacity ${minCapacity} or higher.`;
+        }
+    }
+
+    airlineSummary() {
+        if (this.completedFlights.length === 0) {
+            throw new Error("No flights have been completed yet!");
+        } else {
+            let result = [];
+            result.push(`Budget left $${this.budget}.`);
+            result.push(`You have completed ${this.completedFlights.length} flights.`);
+            result.push(`Airline fleet:`);
+            for(let plane of this.planes) {
+                result.push(`${plane.model} - Cost: ${plane.cost}, Capacity: ${plane.capacity}, Fuel Consumption: ${plane.fuelConsumption}`);
+            }
+            return result.join('\n');
+        }
+    }
+}
+
+let airline2 = new AirlineFleet(500000);
+console.log(airline2.addPlane("Boeing 737", 300000, 180, 5000));
+
+let airline = new AirlineFleet(1000000);
+console.log(airline.addPlane("Boeing 737", 300000, 180, 5000));
+console.log(airline.addPlane("Airbus A320", 250000, 160, 4800));
+console.log(airline.scheduleFlight("New York", 500, 9000, 200));
+console.log(airline.scheduleFlight("Los Angeles", 400, 11000, 150)); 
