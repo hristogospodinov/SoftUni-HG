@@ -12,12 +12,24 @@ function solve() {
         ]
         let isValid = true;
         for(let row of rows) {
-            let inputs = [...row.querySelectorAll('input')].map(a => Number(a.value));
-            if (new Set(inputs).size != 3) {
+            let inputs = [...row.querySelectorAll('input')];
+
+            if (inputs.some(a => a.value === "")) {
                 isValid = false;
+                continue;
             }
-            for (let i = 0; i < inputs.length; i++) {
-                cols[i].add(inputs[i]);
+
+            let values = inputs.map(a => Number(a.value));
+
+            if (
+                new Set(values).size != 3 ||
+                !values.every(value => value >= 1 && value <= 3)
+                ) {
+                isValid = false;
+                continue;
+            }
+            for (let i = 0; i < values.length; i++) {
+                cols[i].add(values[i]);
             }            
         }
         for(let col of cols) {
@@ -37,7 +49,7 @@ function solve() {
         for (let inputField of allInputs) {
             inputField.value = "";
         }
-        resultStyle("0px","","");
+        resultStyle("","","");
     }
 
     function resultStyle(borderColor, message, textColor) {
