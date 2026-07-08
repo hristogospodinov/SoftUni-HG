@@ -11,11 +11,9 @@ function solution() {
             result = result.slice(0,result.length - n);
         },
         print() {
-            console.log(result);
-            
+            console.log(result);            
         }
     }
-
 }
 
 let firstZeroTest = solution();
