@@ -1,11 +1,13 @@
-function solve(firstNum) {
+function solution(outerNum) {
     return function(innerNum) {
-        this += num;
+        return outerNum + innerNum;
     }
-
 }
 
 
 let add5 = solution(5);
-add5(2); // 7
-add5(3); // 8
+
+
+
+console.log(add5(2)); // 7
+console.log(add5(3)); // 8
