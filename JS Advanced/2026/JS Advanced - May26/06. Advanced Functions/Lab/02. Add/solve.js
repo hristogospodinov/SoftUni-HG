@@ -1,5 +1,7 @@
-function solve(num) {
-    return function()
+function solve(firstNum) {
+    return function(innerNum) {
+        this += num;
+    }
 
 }
 
