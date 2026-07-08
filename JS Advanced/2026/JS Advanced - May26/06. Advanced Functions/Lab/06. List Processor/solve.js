@@ -15,8 +15,7 @@ function solve(input) {
     input.forEach((element) => {
         let [command, value] = element.split(" ");
         commands[command](value);
-    })
-    
+    })    
 }
 
 solve(['add hello', 'add again', 'remove hello', 'add again', 'print']);
