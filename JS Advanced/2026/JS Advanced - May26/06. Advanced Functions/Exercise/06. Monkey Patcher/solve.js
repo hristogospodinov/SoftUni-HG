@@ -16,27 +16,23 @@ function solution(command) {
         let balance = upvotes - downvotes;
         let rating = "new";
 
-        if (balance < 0) {
-            rating = "unpopular";
-        }
-
-        if (upvotes > totalVotes * 0.66) {
-            rating = "hot";
-        }
-
-        if (upvotes <= totalVotes * 0.66) {
-            rating = "controversial";
-        }
-
         if (totalVotes < 10) {
-            rating = "new"
-        }
+            rating = "new";
+        } else if (balance < 0) {
+            rating = "unpopular";
+        } else if (upvotes > totalVotes * 0.66) {
+            rating = "hot";
+        } else if (balance >= 0 && totalVotes > 100 && upvotes <= totalVotes * 0.66) {
+            rating = "controversial";
+        } 
 
         let obfusc = Math.ceil(Math.max(upvotes, downvotes) * 0.25);
-        upvotes += obfusc;
-        downvotes += obfusc;
 
-
+        if (totalVotes > 50) {
+            upvotes += obfusc;
+            downvotes += obfusc;
+        }        
+        
         return [
             upvotes,
             downvotes,
@@ -57,7 +53,6 @@ solution.call(post, 'upvote');
 solution.call(post, 'downvote');
 let score = solution.call(post, 'score'); // [127, 127, 0, 'controversial']
 console.log(score);
-
 solution.call(post, 'downvote');         // (executed 50 times)
 score = solution.call(post, 'score');     // [139, 189, -50, 'unpopular']
 console.log(score);
