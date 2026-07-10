@@ -6,7 +6,7 @@ function solve(...inputs) {
         if (!(type in counts)) {
             counts[type] = 0;
         }        
-        counts[type] += 1;
+        counts[type] ++;
     }   
     
     Object.entries(counts)
