@@ -18,9 +18,7 @@ async function getInfo() {
 
         const data = await response.json();
 
-        console.log(data);
         stopName.textContent = data.name;
-        console.log(data.buses);
         
         for (let bus in data.buses) {
             resultBuses.appendChild(createEl('li',`Bus ${bus} arrives in ${data.buses[bus]} minutes`));
