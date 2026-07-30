@@ -3,16 +3,20 @@ function loadRepos() {
 	let userNameInput = document.getElementById('username');
 	let userName = userNameInput.value;
 
+	let url = `https://api.github.com/users/${userName}/repos`;
+
 	// clear current list
 	let result = document.getElementById('repos');
 	result.replaceChildren();
+
+
 
 	// get user repos
 	// if request is successful
 	//     display repos
 	// else
 	//     display error
-	fetch(`https://api.github.com/users/${userName}/repos`)
+	fetch(url)
 		.then(response => {
 			if (!response.ok) {
 				throw new Error(response.status);
