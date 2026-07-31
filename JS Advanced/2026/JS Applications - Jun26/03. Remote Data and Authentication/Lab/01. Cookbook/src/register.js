@@ -45,6 +45,8 @@ async function onRegister(event) {
 
         sessionStorage.setItem('accessToken', accessToken);
 
+        window.location = '/';
+
         console.log(data);
         
     }
