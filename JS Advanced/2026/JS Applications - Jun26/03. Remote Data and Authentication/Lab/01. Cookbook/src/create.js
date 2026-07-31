@@ -43,5 +43,7 @@ async function onCreate(event) {
 
         return;
     }
+
+    window.location = '/01.%20Cookbook/';
     
 }
