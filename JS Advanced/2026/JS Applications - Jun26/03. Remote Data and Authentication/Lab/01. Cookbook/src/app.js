@@ -11,6 +11,11 @@ async function getRecipes() {
     }
     
     const response = await fetch('http://localhost:3030/data/recipes?select=_id%2Cname%2Cimg', options);
+
+    if (!response.ok && response.status === 403) {
+        sessionStorage.removeItem('accessToken');
+        window.location = '/01.%20Cookbook/';
+    }
     const recipes = await response.json();
 
     return Object.values(recipes);
