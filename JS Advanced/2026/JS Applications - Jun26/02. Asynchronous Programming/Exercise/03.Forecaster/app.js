@@ -7,9 +7,6 @@ function attachEvents() {
     let current = document.getElementById('current');
     let upcoming = document.getElementById('upcoming');
     
-
-
-
     let symbols = {
         'Sunny': '☀', // ☀
         'Partly sunny': '⛅', // ⛅
