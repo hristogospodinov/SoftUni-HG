@@ -1,5 +1,11 @@
 document.querySelector('form').addEventListener('submit', onRegister);
 
+fetch('http://localhost:3030/data/recipes', {
+    method: 'get',
+    headers: { 'X-Authorization': 'd901476dfbf067dd9da7c52cbc4b27e0bb733273c2d5e340f60e2452362a2ebc' } 
+});
+
+
 async function onRegister(event) {
     event.preventDefault();
     
@@ -32,7 +38,12 @@ async function onRegister(event) {
             const err = await res.json();
             throw err;
         }
+
         const data = await res.json();
+
+        const { accessToken } = data;
+
+        sessionStorage.setItem('accessToken', accessToken);
 
         console.log(data);
         
