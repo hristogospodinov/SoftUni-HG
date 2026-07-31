@@ -1,5 +1,9 @@
+document.getElementById('logoutBtn').addEventListener('click', onLogout);
+
 async function getRecipes() {
     const accessToken = sessionStorage.getItem('accessToken');
+
+    updateLinks(accessToken);
 
     let options = {
         method: 'get',
@@ -97,4 +101,24 @@ function e(type, attributes, ...content) {
     });
 
     return result;
+}
+
+function updateLinks(hasUser) {
+    if (hasUser) {
+        document.getElementById('user').style.display = 'inline-block';
+    } else {
+        document.getElementById('guest').style.display = 'inline-block';
+    }
+}
+
+function onLogout() {
+    fetch('http://localhost:3030/users/logout', {
+        method: 'get',
+        headers: { 'X-Authorization': sessionStorage.getItem('accessToken') }
+    });
+
+    sessionStorage.removeItem('accessToken');
+
+    window.location = '/01.%20Cookbook/';
+    
 }
