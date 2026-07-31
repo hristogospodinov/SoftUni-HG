@@ -45,7 +45,7 @@ async function onRegister(event) {
 
         sessionStorage.setItem('accessToken', accessToken);
 
-        window.location = '/';
+        window.location = '/01.%20Cookbook/';
 
         console.log(data);
         

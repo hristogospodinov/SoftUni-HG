@@ -4,7 +4,7 @@ async function onLogin(event) {
     event.preventDefault();
 
     const form = event.target;
-    const formData = new formData(form);
+    const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
     const { email, password } = data;
@@ -27,7 +27,7 @@ async function onLogin(event) {
 
         sessionStorage.setItem('accessToken', accessToken);
 
-        window.location = '/';
+        window.location = '/01.%20Cookbook/';
     } catch (err) {
         alert(err.message);
     }
