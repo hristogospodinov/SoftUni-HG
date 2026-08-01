@@ -4,10 +4,11 @@ import { render } from 'lit-html';
 
 const main = document.getElementById('main-element');
 
+page(decorateContext);
+
 page('/', homeView);
 
-page.start()
-
+page.start();
 
 function decorateContext(current, next) {
     current.render = (template) => render(template, main);
