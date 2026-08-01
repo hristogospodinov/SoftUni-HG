@@ -6,6 +6,8 @@ import { loginView } from './views/login.js';
 import { registerView } from './views/register.js';
 import { marketView } from './views/market.js';
 import { createView } from './views/create.js';
+import { detailsView } from './views/details.js';
+import { editView } from './views/edit.js';
 
 const main = document.getElementById('main-element');
 
@@ -21,6 +23,8 @@ page('/login', loginView);
 page('/register', registerView);
 page('/market', marketView);
 page('/create', createView);
+page('/details/:id', detailsView);
+page('/edit/:id', editView);
 
 page.start();
 

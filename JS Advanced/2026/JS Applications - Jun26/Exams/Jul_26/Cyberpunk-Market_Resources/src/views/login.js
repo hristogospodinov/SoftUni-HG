@@ -1,4 +1,5 @@
 import { html } from '../../node_modules/lit-html/lit-html.js';
+import { showError } from '../utils/notification.js';
 
 export function loginView(current) {
     // Create template
@@ -40,7 +41,7 @@ async function onSubmit(event, current) {
     const password = formData.get('password');
 
     if (!email || !password) {
-        alert("All fields are required!");
+        showError("All fields are required!");
 
         return;
     }
@@ -56,7 +57,7 @@ async function onSubmit(event, current) {
 
     if (!response.ok) {
         const error = await response.json();
-        alert(error.message);
+        showError(error.message);
         return;
     }
 

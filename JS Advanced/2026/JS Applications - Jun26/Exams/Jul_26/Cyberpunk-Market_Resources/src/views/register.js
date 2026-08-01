@@ -1,4 +1,5 @@
 import { html } from '../../node_modules/lit-html/lit-html.js';
+import { showError } from '../utils/notification.js';
 
 export function registerView(current) {
     const template = html`
@@ -48,12 +49,12 @@ async function onSubmit(event, current) {
     const rePassword = formData.get('re-password');
 
     if (!email || !password) {
-        alert("All fields are required!");
+        showError("All fields are required!");
         return;
     }
 
     if (password !== rePassword) {
-        alert('Passwords don\'t match!');
+        showError('Passwords don\'t match!');
         return;
     }
 
@@ -68,7 +69,7 @@ async function onSubmit(event, current) {
 
     if (!response.ok) {
         const error = await response.json();
-        alert(error.message);
+        showError(error.message);
         return;
     }
 
