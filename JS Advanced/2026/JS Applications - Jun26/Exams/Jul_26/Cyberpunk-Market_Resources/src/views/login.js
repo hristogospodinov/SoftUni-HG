@@ -6,7 +6,7 @@ export function loginView(current) {
         <section id="login">
           <div class="form">
             <h2>Login</h2>
-            <form @submit=${onSubmit} class="login-form">
+            <form @submit=${(event) => onSubmit(event, current)} class="login-form">
               <input type="text" name="email" id="email" placeholder="email" />
 
               <input
@@ -29,7 +29,7 @@ export function loginView(current) {
     current.render(template);
 }
 
-function onSubmit(event) {
+async function onSubmit(event, current) {
     event.preventDefault();
 
     const form = event.currentTarget;
@@ -39,13 +39,35 @@ function onSubmit(event) {
     const email = formData.get('email');
     const password = formData.get('password');
 
-    console.log(email, password);
-    
-
     if (!email || !password) {
         alert("All fields are required!");
 
         return;
     }
 
+    const response = await fetch('http://localhost:3030/users/login', {
+        method: 'post',
+        headers: { 'Content-Type' : 'application/json' },
+        body: JSON.stringify({
+            email,
+            password
+        })
+    });
+
+    if (!response.ok) {
+        const error = await response.json();
+        alert(error.message);
+        return;
+    }
+
+    const userData = await response.json();
+    
+    const user = {
+        _id: userData._id,
+        accessToken: userData.accessToken
+    };
+
+    sessionStorage.setItem('user', JSON.stringify(user));
+
+    current.goTo('/market');
 }
