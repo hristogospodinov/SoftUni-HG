@@ -6,7 +6,7 @@ export function loginView(current) {
         <section id="login">
           <div class="form">
             <h2>Login</h2>
-            <form class="login-form">
+            <form @submit=${onSubmit} class="login-form">
               <input type="text" name="email" id="email" placeholder="email" />
 
               <input
@@ -27,4 +27,10 @@ export function loginView(current) {
     `;
 
     current.render(template);
+}
+
+function onSubmit(event) {
+    event.preventDefault();
+
+    console.log('Login submitted');
 }
