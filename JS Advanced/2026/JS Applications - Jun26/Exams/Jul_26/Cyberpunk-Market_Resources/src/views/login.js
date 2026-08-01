@@ -1,4 +1,4 @@
-import { html } from 'lit-html';
+import { html } from '../../node_modules/lit-html/lit-html.js';
 
 export function loginView(current) {
     // Create template
@@ -32,5 +32,20 @@ export function loginView(current) {
 function onSubmit(event) {
     event.preventDefault();
 
-    console.log('Login submitted');
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    // const data = Object.fromEntries(formData.entries());
+
+    const email = formData.get('email');
+    const password = formData.get('password');
+
+    console.log(email, password);
+    
+
+    if (!email || !password) {
+        alert("All fields are required!");
+
+        return;
+    }
+
 }
