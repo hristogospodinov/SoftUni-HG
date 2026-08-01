@@ -7,3 +7,10 @@ const main = document.getElementById('main-element');
 page('/', homeView);
 
 page.start()
+
+
+function decorateContext(current, next) {
+    current.render = (template) => render(template, main);
+
+    next();
+}
