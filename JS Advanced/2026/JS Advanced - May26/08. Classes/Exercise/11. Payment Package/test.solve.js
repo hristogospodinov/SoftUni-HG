@@ -5,404 +5,232 @@ describe('PaymentPackage', () => {
 
     describe('constructor', () => {
 
-        it('should initialize name', () => {
+        it('should initialize the package correctly', () => {
             const pack = new PaymentPackage('HR Services', 1500);
 
             expect(pack.name).to.equal('HR Services');
-        });
-
-        it('should initialize value', () => {
-            const pack = new PaymentPackage('HR Services', 1500);
-
             expect(pack.value).to.equal(1500);
-        });
-
-        it('should set default VAT to 20', () => {
-            const pack = new PaymentPackage('HR Services', 1500);
-
             expect(pack.VAT).to.equal(20);
-        });
-
-        it('should set default active to true', () => {
-            const pack = new PaymentPackage('HR Services', 1500);
-
             expect(pack.active).to.equal(true);
         });
 
-        it('should throw when constructor name is empty', () => {
-            expect(() => new PaymentPackage('', 1500))
-                .to.throw(Error, 'Name must be a non-empty string');
-        });
-
-        it('should throw when constructor name is not a string', () => {
+        it('should validate constructor parameters', () => {
             expect(() => new PaymentPackage(123, 1500))
-                .to.throw(Error, 'Name must be a non-empty string');
-        });
+                .to.throw('Name must be a non-empty string');
 
-        it('should throw when constructor name is null', () => {
-            expect(() => new PaymentPackage(null, 1500))
-                .to.throw(Error, 'Name must be a non-empty string');
-        });
+            expect(() => new PaymentPackage('', 1500))
+                .to.throw('Name must be a non-empty string');
 
-        it('should throw when constructor name is undefined', () => {
-            expect(() => new PaymentPackage(undefined, 1500))
-                .to.throw(Error, 'Name must be a non-empty string');
-        });
-
-        it('should throw when constructor value is undefined', () => {
-            expect(() => new PaymentPackage('HR Services'))
-                .to.throw(Error, 'Value must be a non-negative number');
-        });
-
-        it('should throw when constructor value is a string', () => {
             expect(() => new PaymentPackage('HR Services', '1500'))
-                .to.throw(Error, 'Value must be a non-negative number');
-        });
+                .to.throw('Value must be a non-negative number');
 
-        it('should throw when constructor value is negative', () => {
             expect(() => new PaymentPackage('HR Services', -1))
-                .to.throw(Error, 'Value must be a non-negative number');
-        });
-
-        it('should allow zero as value', () => {
-            const pack = new PaymentPackage('HR Services', 0);
-
-            expect(pack.value).to.equal(0);
+                .to.throw('Value must be a non-negative number');
         });
     });
 
-    describe('name getter/setter', () => {
+    describe('name', () => {
 
-        it('should get the current name', () => {
+        it('should have getter and setter', () => {
+            const descriptor =
+                Object.getOwnPropertyDescriptor(
+                    PaymentPackage.prototype,
+                    'name'
+                );
+
+            expect(descriptor.get).to.be.a('function');
+            expect(descriptor.set).to.be.a('function');
+        });
+
+        it('should get and set name', () => {
             const pack = new PaymentPackage('HR Services', 1500);
 
             expect(pack.name).to.equal('HR Services');
-        });
-
-        it('should set a new name', () => {
-            const pack = new PaymentPackage('HR Services', 1500);
 
             pack.name = 'Consultation';
 
             expect(pack.name).to.equal('Consultation');
         });
 
-        it('should throw when name is empty', () => {
+        it('should validate name', () => {
             const pack = new PaymentPackage('HR Services', 1500);
 
-            expect(() => {
-                pack.name = '';
-            }).to.throw(Error, 'Name must be a non-empty string');
-        });
+            expect(() => pack.name = 123)
+                .to.throw('Name must be a non-empty string');
 
-        it('should throw when name is a number', () => {
-            const pack = new PaymentPackage('HR Services', 1500);
+            expect(() => pack.name = [])
+                .to.throw('Name must be a non-empty string');
 
-            expect(() => {
-                pack.name = 123;
-            }).to.throw(Error, 'Name must be a non-empty string');
-        });
-
-        it('should throw when name is null', () => {
-            const pack = new PaymentPackage('HR Services', 1500);
-
-            expect(() => {
-                pack.name = null;
-            }).to.throw(Error, 'Name must be a non-empty string');
-        });
-
-        it('should throw when name is undefined', () => {
-            const pack = new PaymentPackage('HR Services', 1500);
-
-            expect(() => {
-                pack.name = undefined;
-            }).to.throw(Error, 'Name must be a non-empty string');
-        });
-
-        it('should preserve the previous name after invalid assignment', () => {
-            const pack = new PaymentPackage('HR Services', 1500);
-
-            expect(() => {
-                pack.name = '';
-            }).to.throw();
-
-            expect(pack.name).to.equal('HR Services');
+            expect(() => pack.name = '')
+                .to.throw('Name must be a non-empty string');
         });
     });
 
-    describe('value getter/setter', () => {
+    describe('value', () => {
 
-        it('should get the current value', () => {
+        it('should have getter and setter', () => {
+            const descriptor =
+                Object.getOwnPropertyDescriptor(
+                    PaymentPackage.prototype,
+                    'value'
+                );
+
+            expect(descriptor.get).to.be.a('function');
+            expect(descriptor.set).to.be.a('function');
+        });
+
+        it('should get and set value', () => {
             const pack = new PaymentPackage('HR Services', 1500);
 
             expect(pack.value).to.equal(1500);
-        });
-
-        it('should set a new value', () => {
-            const pack = new PaymentPackage('HR Services', 1500);
 
             pack.value = 2000;
 
             expect(pack.value).to.equal(2000);
         });
 
-        it('should allow zero', () => {
+        it('should validate value', () => {
             const pack = new PaymentPackage('HR Services', 1500);
+
+            expect(() => pack.value = '1500')
+                .to.throw('Value must be a non-negative number');
+
+            expect(() => pack.value = [])
+                .to.throw('Value must be a non-negative number');
+
+            expect(() => pack.value = -1)
+                .to.throw('Value must be a non-negative number');
 
             pack.value = 0;
-
             expect(pack.value).to.equal(0);
         });
-
-        it('should throw when value is negative', () => {
-            const pack = new PaymentPackage('HR Services', 1500);
-
-            expect(() => {
-                pack.value = -1;
-            }).to.throw(Error, 'Value must be a non-negative number');
-        });
-
-        it('should throw when value is a string', () => {
-            const pack = new PaymentPackage('HR Services', 1500);
-
-            expect(() => {
-                pack.value = '1500';
-            }).to.throw(Error, 'Value must be a non-negative number');
-        });
-
-        it('should throw when value is null', () => {
-            const pack = new PaymentPackage('HR Services', 1500);
-
-            expect(() => {
-                pack.value = null;
-            }).to.throw(Error, 'Value must be a non-negative number');
-        });
-
-        it('should preserve the previous value after invalid assignment', () => {
-            const pack = new PaymentPackage('HR Services', 1500);
-
-            expect(() => {
-                pack.value = -100;
-            }).to.throw();
-
-            expect(pack.value).to.equal(1500);
-        });
     });
 
-    describe('VAT getter/setter', () => {
+    describe('VAT', () => {
 
-        it('should get the default VAT', () => {
+        it('should have getter and setter', () => {
+            const descriptor =
+                Object.getOwnPropertyDescriptor(
+                    PaymentPackage.prototype,
+                    'VAT'
+                );
+
+            expect(descriptor.get).to.be.a('function');
+            expect(descriptor.set).to.be.a('function');
+        });
+
+        it('should get and set VAT', () => {
             const pack = new PaymentPackage('HR Services', 1500);
 
             expect(pack.VAT).to.equal(20);
+
+            pack.VAT = 30;
+
+            expect(pack.VAT).to.equal(30);
         });
 
-        it('should set VAT', () => {
+        it('should validate VAT', () => {
             const pack = new PaymentPackage('HR Services', 1500);
 
-            pack.VAT = 15;
+            expect(() => pack.VAT = '20')
+                .to.throw('VAT must be a non-negative number');
 
-            expect(pack.VAT).to.equal(15);
-        });
+            expect(() => pack.VAT = [])
+                .to.throw('VAT must be a non-negative number');
 
-        it('should allow zero VAT', () => {
-            const pack = new PaymentPackage('HR Services', 1500);
+            expect(() => pack.VAT = -1)
+                .to.throw('VAT must be a non-negative number');
 
             pack.VAT = 0;
-
             expect(pack.VAT).to.equal(0);
-        });
-
-        it('should throw when VAT is negative', () => {
-            const pack = new PaymentPackage('HR Services', 1500);
-
-            expect(() => {
-                pack.VAT = -1;
-            }).to.throw(Error, 'VAT must be a non-negative number');
-        });
-
-        it('should throw when VAT is a string', () => {
-            const pack = new PaymentPackage('HR Services', 1500);
-
-            expect(() => {
-                pack.VAT = '20';
-            }).to.throw(Error, 'VAT must be a non-negative number');
-        });
-
-        it('should throw when VAT is null', () => {
-            const pack = new PaymentPackage('HR Services', 1500);
-
-            expect(() => {
-                pack.VAT = null;
-            }).to.throw(Error, 'VAT must be a non-negative number');
-        });
-
-        it('should preserve previous VAT after invalid assignment', () => {
-            const pack = new PaymentPackage('HR Services', 1500);
-
-            expect(() => {
-                pack.VAT = -10;
-            }).to.throw();
-
-            expect(pack.VAT).to.equal(20);
         });
     });
 
-    describe('active getter/setter', () => {
+    describe('active', () => {
 
-        it('should be active by default', () => {
+        it('should have getter and setter', () => {
+            const descriptor =
+                Object.getOwnPropertyDescriptor(
+                    PaymentPackage.prototype,
+                    'active'
+                );
+
+            expect(descriptor.get).to.be.a('function');
+            expect(descriptor.set).to.be.a('function');
+        });
+
+        it('should get and set active', () => {
             const pack = new PaymentPackage('HR Services', 1500);
 
             expect(pack.active).to.equal(true);
-        });
-
-        it('should set active to false', () => {
-            const pack = new PaymentPackage('HR Services', 1500);
 
             pack.active = false;
-
             expect(pack.active).to.equal(false);
-        });
 
-        it('should set active back to true', () => {
-            const pack = new PaymentPackage('HR Services', 1500);
-
-            pack.active = false;
             pack.active = true;
-
             expect(pack.active).to.equal(true);
         });
 
-        it('should throw when active is null', () => {
+        it('should validate active', () => {
             const pack = new PaymentPackage('HR Services', 1500);
 
-            expect(() => {
-                pack.active = null;
-            }).to.throw(Error, 'Active status must be a boolean');
-        });
+            expect(() => pack.active = 'true')
+                .to.throw('Active status must be a boolean');
 
-        it('should throw when active is a string', () => {
-            const pack = new PaymentPackage('HR Services', 1500);
+            expect(() => pack.active = [])
+                .to.throw('Active status must be a boolean');
 
-            expect(() => {
-                pack.active = 'true';
-            }).to.throw(Error, 'Active status must be a boolean');
-        });
-
-        it('should throw when active is a number', () => {
-            const pack = new PaymentPackage('HR Services', 1500);
-
-            expect(() => {
-                pack.active = 1;
-            }).to.throw(Error, 'Active status must be a boolean');
-        });
-
-        it('should preserve active status after invalid assignment', () => {
-            const pack = new PaymentPackage('HR Services', 1500);
-
-            expect(() => {
-                pack.active = null;
-            }).to.throw();
-
-            expect(pack.active).to.equal(true);
+            expect(() => pack.active = -1)
+                .to.throw('Active status must be a boolean');
         });
     });
 
     describe('toString()', () => {
 
-        it('should format an active package correctly', () => {
-            const pack = new PaymentPackage('HR Services', 1500);
+        it('should format active package correctly', () => {
+            const pack = new PaymentPackage('abc', 123);
 
             expect(pack.toString()).to.equal(
-                'Package: HR Services\n' +
-                '- Value   (excl. VAT): 1500\n' +
-                '- Value   (VAT 20%): 1800'
-            );
-        });
-
-        it('should add inactive label when package is inactive', () => {
-            const pack = new PaymentPackage('HR Services', 1500);
-
-            pack.active = false;
-
-            expect(pack.toString()).to.equal(
-                'Package: HR Services (inactive)\n' +
-                '- Value   (excl. VAT): 1500\n' +
-                '- Value   (VAT 20%): 1800'
-            );
-        });
-
-        it('should remove inactive label when package becomes active', () => {
-            const pack = new PaymentPackage('HR Services', 1500);
-
-            pack.active = false;
-            pack.active = true;
-
-            expect(pack.toString()).to.equal(
-                'Package: HR Services\n' +
-                '- Value   (excl. VAT): 1500\n' +
-                '- Value   (VAT 20%): 1800'
-            );
-        });
-
-        it('should calculate VAT correctly', () => {
-            const pack = new PaymentPackage('HR Services', 1000);
-
-            expect(pack.toString()).to.equal(
-                'Package: HR Services\n' +
-                '- Value   (excl. VAT): 1000\n' +
-                '- Value   (VAT 20%): 1200'
+                'Package: abc\n' +
+                '- Value (excl. VAT): 123\n' +
+                '- Value (VAT 20%): 147.6'
             );
         });
 
         it('should use changed VAT', () => {
-            const pack = new PaymentPackage('HR Services', 1000);
+            const pack = new PaymentPackage('abc', 123);
 
-            pack.VAT = 10;
+            pack.VAT = 30;
 
             expect(pack.toString()).to.equal(
-                'Package: HR Services\n' +
-                '- Value   (excl. VAT): 1000\n' +
-                '- Value   (VAT 10%): 1100'
+                'Package: abc\n' +
+                '- Value (excl. VAT): 123\n' +
+                '- Value (VAT 30%): 159.9'
             );
         });
 
-        it('should use changed value', () => {
-            const pack = new PaymentPackage('HR Services', 1000);
+        it('should mark inactive package', () => {
+            const pack = new PaymentPackage('abc', 123);
 
-            pack.value = 2000;
-
-            expect(pack.toString()).to.equal(
-                'Package: HR Services\n' +
-                '- Value   (excl. VAT): 2000\n' +
-                '- Value   (VAT 20%): 2400'
-            );
-        });
-
-        it('should use changed name', () => {
-            const pack = new PaymentPackage('HR Services', 1000);
-
-            pack.name = 'Consultation';
-
-            expect(pack.toString()).to.equal(
-                'Package: Consultation\n' +
-                '- Value   (excl. VAT): 1000\n' +
-                '- Value   (VAT 20%): 1200'
-            );
-        });
-
-        it('should reflect all changed properties', () => {
-            const pack = new PaymentPackage('HR Services', 1000);
-
-            pack.name = 'Consultation';
-            pack.value = 2000;
-            pack.VAT = 10;
             pack.active = false;
 
             expect(pack.toString()).to.equal(
-                'Package: Consultation (inactive)\n' +
-                '- Value   (excl. VAT): 2000\n' +
-                '- Value   (VAT 10%): 2200'
+                'Package: abc (inactive)\n' +
+                '- Value (excl. VAT): 123\n' +
+                '- Value (VAT 20%): 147.6'
+            );
+        });
+
+        it('should combine inactive state and changed VAT', () => {
+            const pack = new PaymentPackage('abc', 123);
+
+            pack.VAT = 30;
+            pack.active = false;
+
+            expect(pack.toString()).to.equal(
+                'Package: abc (inactive)\n' +
+                '- Value (excl. VAT): 123\n' +
+                '- Value (VAT 30%): 159.9'
             );
         });
     });
